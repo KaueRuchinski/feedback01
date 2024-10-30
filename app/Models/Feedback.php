@@ -4,10 +4,18 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Feedback extends Model
 {
-    use HasFactory;
-    protected $table = 'feedbacks'; // Defina o nome correto da tabela
-    protected $fillable = ['comentario', 'estrela', 'geladeira_id']; // Adicione os campos aqui
+    use HasFactory, SoftDeletes;
+
+    protected $table = 'feedbacks';
+    protected $fillable = ['comentario', 'estrelas', 'geladeira_id'];
+
+    // Relacionamento com a Geladeira
+    public function geladeira()
+    {
+        return $this->belongsTo(Geladeira::class);
+    }
 }

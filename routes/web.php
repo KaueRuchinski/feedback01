@@ -31,4 +31,9 @@ Route::post('/geladeira/store/{id}', [PageController::class, 'storeFeedback'])->
 
 Route::post('/logout', [\App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 
+Route::prefix('feedback')->group(function () {
+    Route::get('/{geladeira_id}', [FeedbackController::class, 'index'])->name('feedback.index'); // Exibir feedbacks
+    Route::post('/{geladeira_id}', [FeedbackController::class, 'store'])->name('feedback.store'); // Armazenar feedback
+});
+
 require __DIR__.'/auth.php';
